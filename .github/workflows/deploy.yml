@@ -1,128 +1,24 @@
 name: Release Node.js app
 
-
-
-
-
-
 on:
-
-
   push:
-
-
     branches:
-
-
-      - main # Важно: ветка должна называться main [5]
-
-
-
-
+      - main
 
 jobs:
-
-
   build:
-
-
     runs-on: ubuntu-latest
-
-
- steps:
-
-
-      # Загрузка кода из репозитория (убраны скобки)
-
-
+    steps:
       - uses: actions/checkout@v4
 
-
-
-
-
-      # Авторизация в Docker Hub 
-
-
       - name: Login to Docker Hub
-
-
         uses: docker/login-action@v3
-
-
         with:
-
-
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-
-
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-
-
-
-
-      # Сборка и отправка (push) образа
-
-
       - name: Build and push
-
-
         uses: docker/build-push-action@v5
-
-
         with:
-
-
           push: true
-
-
-          # Не забудьте указать ваш логин Docker Hub здесь
-
-
           tags: ikm4n/express_app:latest
-
-
-
-
-
-      # Авторизация в Docker Hub с использованием секретов
-
-
-      - name: Login to Docker Hub
-
-
-        uses: docker/login-action@v2 [8, 9]
-
-
-        with:
-
-
-          username: ${{ secrets.DOCKERHUB_USERNAME }} [2]
-
-
-          password: ${{ secrets.DOCKERHUB_TOKEN }} [2]
-
-
-
-
-
-      # Сборка и отправка (push) образа
-
-
-      - name: Build and push
-
-
-        uses: docker/build-push-action@v3 [8, 9]
-
-
-        with:
-
-
-          push: true
-
-
-          # ВНИМАНИЕ: Замените 'ваш_логин' на ваш реальный логин в Docker Hub
-
-
-          tags: ваш_логин/express_app:latest [6]
