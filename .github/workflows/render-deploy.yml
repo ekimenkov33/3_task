@@ -9,4 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger deployment
-        run: curl -X POST ${{ secrets.RENDER_WEBHOOK }}
+        run: curl -X POST "${{ secrets.RENDER_WEBHOOK }}"
+
